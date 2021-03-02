@@ -1,5 +1,7 @@
 package com.example.kbtg.user;
 
+import java.util.Objects;
+
 public class UserResponse {
     private Integer id;
     private String name;
@@ -38,6 +40,19 @@ public class UserResponse {
         this.age = age;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserResponse response = (UserResponse) o;
+        return Objects.equals(id, response.id) &&
+                Objects.equals(name, response.name) &&
+                Objects.equals(age, response.age);
+    }
 
-    // Setter and Getter methods
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, age);
+    }
+
 }

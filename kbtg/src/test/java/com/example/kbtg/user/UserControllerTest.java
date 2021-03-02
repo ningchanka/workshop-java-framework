@@ -24,4 +24,13 @@ class UserControllerTest {
         assertEquals(30, response.getAge());
     }
 
+    @Test
+    public void success_get_user_id_1_quiz(){
+        // Act
+        UserResponse response = restTemplate.getForObject("/user/1", UserResponse.class);
+        // Assert
+        UserResponse expected = new UserResponse(1, "test", 30);
+        assertEquals(expected, response);
+    }
+
 }
