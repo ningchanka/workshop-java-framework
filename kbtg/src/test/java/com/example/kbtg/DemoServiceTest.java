@@ -14,16 +14,41 @@ public class DemoServiceTest {
     public void random_5(){
         DemoService demoService = new DemoService();
         demoService.setRandom(new MockRandom(5));
-        String actualResult = demoService.generateData("Ning");
-        assertEquals(actualResult, "Ning5");
+        String actualResult = demoService.generateData("test");
+        assertEquals(actualResult, "test5");
     }
 
-//    @Test
-//    public void throw_exception(){
-//        DemoService demoService = new DemoService();
-//        String actualResult = demoService.generateData("Ning");
-//
-//    }
+    @Test
+    @DisplayName("ในการทำงานต้อง random ได้ค่า 6")
+    public void random_mock6(){
+        DemoService demoService = new DemoService();
+        demoService.setRandom(new Random6());
+        String actualResult = demoService.generateData("test");
+        assertEquals(actualResult, "test6");
+    }
+
+    @Test
+    public void throw_exception_1(){
+        DemoService demoService = new DemoService();
+        demoService.setRandom(new MockRandom(1));
+        try{
+            demoService.generateData("test");
+            fail();
+        }catch (RuntimeException e){
+            assertEquals("Invalid number with 1", e.getMessage());
+        }
+    }
+
+    @Test
+    public void throw_exception_with_junit5(){
+        DemoService demoService = new DemoService();
+        demoService.setRandom(new MockRandom(1));
+        //Junit 5 style
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            demoService.generateData("test");
+        });
+        assertEquals("Invalid number with 1", exception.getMessage());
+    }
 
 }
 
@@ -34,14 +59,14 @@ class MockRandom extends Random {
         this.result = result;
     }
     @Override
-    public int nextInt() {
-        return 5;//result;
+    public int nextInt(int bound) {
+        return result;
     }
 }
 
-class Random5 extends Random {
+class Random6 extends Random {
     @Override
-    public int nextInt() {
-        return 5;
+    public int nextInt(int bound) {
+        return 6;
     }
 }

@@ -9,7 +9,7 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public UserResponse getUserBy(@PathVariable int id) {
-        return new UserResponse(id, "som", 30);
+        return new UserResponse(id, "test", 30);
     }
 
 

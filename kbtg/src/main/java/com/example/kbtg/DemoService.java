@@ -14,7 +14,7 @@ public class DemoService {
         if(number >= 5 && number <= 8){
             return name + number;
         }
-        throw new RuntimeException("Invalid number with " +number);
+        throw new RuntimeException("Invalid number with " + number);
     }
 
 }
